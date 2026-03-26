@@ -1,0 +1,55 @@
+{
+  "manifest_version": 3,
+  "name": "SmartSaver Sidebar",
+  "version": "2.0.0",
+  "description": "Save selected text and links from any webpage into a fast, AI-ready, responsive sidebar.",
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "http://localhost:3000/*"
+  ],
+  "action": {
+    "default_title": "Toggle SmartSaver Sidebar"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content/content.js"
+      ],
+      "css": [
+        "content/content.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "commands": {
+    "save-selected-content": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S"
+      },
+      "description": "Save selected content instantly"
+    }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "sidebar/*"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ]
+}

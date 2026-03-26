@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartSaver Sidebar</title>
+  <link rel="stylesheet" href="sidebar.css">
+</head>
+<body data-theme="dark">
+  <div class="app">
+    <header class="topbar panel">
+      <div>
+        <p class="eyebrow">Productivity extension</p>
+        <h1>SmartSaver</h1>
+        <p class="subtext">Capture text, links, and selections in one premium sidebar.</p>
+      </div>
+      <div class="topbar-actions">
+        <button id="themeToggle" class="ghost-btn">Theme</button>
+        <button id="syncButton" class="ghost-btn">Sync</button>
+        <button id="closeButton" class="ghost-btn">Close</button>
+      </div>
+    </header>
+
+    <section class="hero panel">
+      <div class="hero-copy">
+        <h2>Save once, review anywhere.</h2>
+        <p>Right click selected text or links, or press <strong>Ctrl + Shift + S</strong> to save instantly.</p>
+      </div>
+      <div class="stats">
+        <div class="stat-card">
+          <span>Total</span>
+          <strong id="totalCount">0</strong>
+        </div>
+        <div class="stat-card">
+          <span>Links</span>
+          <strong id="linkCount">0</strong>
+        </div>
+        <div class="stat-card">
+          <span>Mode</span>
+          <strong id="themeLabel">Dark</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="toolbar panel">
+      <label class="field grow">
+        <span>Search</span>
+        <input id="searchInput" type="search" placeholder="Search content, title, or URL">
+      </label>
+      <label class="field">
+        <span>Filter</span>
+        <select id="filterInput">
+          <option value="all">All</option>
+          <option value="text">Text</option>
+          <option value="link">Links</option>
+        </select>
+      </label>
+      <button id="exportButton" class="primary-btn">Export</button>
+    </section>
+
+    <main class="content-grid">
+      <section class="panel list-panel">
+        <div class="section-head">
+          <div>
+            <p class="label">Saved items</p>
+            <p id="resultCount" class="subtext">0 results</p>
+          </div>
+        </div>
+        <div id="emptyState" class="empty-state hidden">
+          <h3>No saved items yet</h3>
+          <p>Select any text, right click, and use the SmartSaver context menu.</p>
+        </div>
+        <div id="itemsList" class="items-list"></div>
+      </section>
+
+      <aside class="panel detail-panel">
+        <div id="detailPlaceholder" class="detail-placeholder">
+          <h3>Detail view</h3>
+          <p>Select a card to inspect content, copy it, or run AI Review.</p>
+        </div>
+        <div id="detailView" class="detail-view hidden">
+          <div class="detail-meta">
+            <span id="detailType" class="badge">text</span>
+            <span id="detailTime" class="subtext"></span>
+          </div>
+          <h2 id="detailTitle"></h2>
+          <a id="detailUrl" href="#" target="_blank" rel="noreferrer"></a>
+          <pre id="detailContent"></pre>
+          <div class="detail-actions">
+            <button id="copyButton" class="ghost-btn">Copy</button>
+            <button id="reviewButton" class="primary-btn">AI Review</button>
+            <button id="deleteButton" class="danger-btn">Delete</button>
+          </div>
+          <div id="reviewOutput" class="review-output hidden"></div>
+        </div>
+      </aside>
+    </main>
+
+    <section class="panel settings-panel">
+      <div class="section-head">
+        <div>
+          <p class="label">Connection</p>
+          <p class="subtext">The extension uses a local secure backend so keys never ship in frontend files.</p>
+        </div>
+        <button id="saveSettingsButton" class="ghost-btn">Save</button>
+      </div>
+      <div class="settings-grid">
+        <label class="field">
+          <span>Backend URL</span>
+          <input id="backendUrlInput" type="text" placeholder="http://localhost:3000">
+        </label>
+        <label class="field">
+          <span>Cloud User ID</span>
+          <input id="cloudUserIdInput" type="text" placeholder="jaswant-yadav">
+        </label>
+        <label class="field switch-field">
+          <span>Enable Firebase sync</span>
+          <input id="cloudEnabledInput" type="checkbox">
+        </label>
+      </div>
+    </section>
+
+    <footer class="panel footer">
+      <div>
+        <p class="label">Owner</p>
+        <p>Jaswant Yadav</p>
+      </div>
+      <div>
+        <p>@jaswant_0707</p>
+        <p>@the.chillcoder</p>
+      </div>
+      <div>
+        <a href="mailto:jaswanty132@gmail.com">jaswanty132@gmail.com</a>
+        <a href="mailto:chillcoder4@gmail.com">chillcoder4@gmail.com</a>
+      </div>
+    </footer>
+  </div>
+
+  <template id="itemCardTemplate">
+    <article class="item-card">
+      <div class="item-head">
+        <span class="badge"></span>
+        <time></time>
+      </div>
+      <h3 class="item-title"></h3>
+      <p class="item-preview"></p>
+      <p class="item-source subtext"></p>
+      <div class="item-actions">
+        <button class="ghost-btn" data-action="copy">Copy</button>
+        <button class="ghost-btn" data-action="review">AI Review</button>
+        <button class="danger-btn" data-action="delete">Delete</button>
+      </div>
+    </article>
+  </template>
+
+  <script type="module" src="sidebar.js"></script>
+</body>
+</html>
